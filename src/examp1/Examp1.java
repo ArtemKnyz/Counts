@@ -1,31 +1,39 @@
+/*Написать программный код, который перебирает целые числа от 0 до бесконечности
+ и выводит на экран те, которые делятся без остатка на количество разрядов (знаков)
+ этого числа (т.е. те двухзначные, которые делятся на 2, трехзначные на три и т.д.).
+ Выполнение обработки должно остановиться в тот момент, когда всего будет 
+ выведено N (задается пользователем) таких чисел.
+ Результат нужно предоставить в виде:
+ 1) исходный код
+ 2) результат выполнения кода для N = 28, 120, 500 */
+
 package examp1;
 
 import java.util.*;
 
-import java.util.Scanner;
-
 public class Examp1 {
+
     public static int n = 0;
 
     public static void main(String[] args) {
-        List<Integer> arr = new ArrayList<>();
+        List<Integer> arr = new ArrayList<>();           //все найденные числа будем записываем в этот массив
         Scanner scan = new Scanner(System.in);
         System.out.println("Введите число: ");
         int a = scan.nextInt();
-        for (int i = 0; i < 100; i++) {
-            if (i % 2 == 0) {
+        n = a;
+        for (int i = 0; i < Integer.MAX_VALUE; i++) {    //перебираем "целые числа от 0 до бесконечности"
+            if (i % razryad() == 0) {                    //проверка, делится ли число без остатка на количество разрядов (знаков) этого числа
                 arr.add(i);
-                if (arr.size() <= a) {
-                    System.out.print(i + " ");
-                    System.out.print(arr.size() + "; ");
+                if (arr.size() <= a) {                   //проверяем выведено ли уже N чисел (задается пользователем)
+                    System.out.println(i + " ");
+                } else {
+                    break;
                 }
             }
-            n=arr.size();
         }
     }
-    void razryad(){
-        
-        System.out.println("asdf");
-    }
 
+    public static int razryad() {                        //метод определяет разрядность вводимого числа
+        return (int) Math.ceil(Math.log10(n+.5));
+    }
 }
